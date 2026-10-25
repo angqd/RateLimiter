@@ -1,9 +1,8 @@
 # Notification rate limiter
 
-A small Python prototype I built to practice low-level design. It decides whether a notification may go out, given caps per user, per team and per company.
-
+A small Python prototype I built as part of my attempts to practice LLD.
+LLD temp project 2 till now after RobustWorkerQueue.
 It is one module, `rate_limiter.py`, with no dependencies beyond the standard library. The tests use pytest.
-
 ## What it does
 
 Each level has a cap per sliding 10-minute window. The prototype uses 3 per user, 10 per team and 20 per company in tests, and the caps are plain config. A send goes out only if it fits under all three levels.
