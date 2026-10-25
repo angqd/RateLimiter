@@ -1,0 +1,80 @@
+CLASSES (hold behavior)
+
+RateLimiter
+	Its job is to run the whole sequence of responding to a request: get the membership, call the store, build the Decision, apply the fallback policy if the store fails.
+	Doesnt need to know about the org service (it only talks to MappingCache), or the store's lock and key layout.
+	Builds the ScopeLimit list (user first, then team, then company) and wraps only the try_admit call in try/except StoreUnavailable. Any other exception is a bug and is not caught.
+
+LogStore
+	It owns the log of which requests were accepted per key. Will handle request retries (seen request_id) and enforcing TTL on stale logs. The store owns the atomic check and write in one method, try_admit(scopes, request_id). It reads the clock itself, once per call. This keeps the lock near the data it protects, and a Redis-backed store can implement the same method later.
+	Convention: scopes[0] is the user level. The duplicate check runs on that key only, because an accepted request is written to every level.
+	It gets a list of ScopeLimit (scope name, id, limit), not Limits. The store builds the key string itself (e.g. "user:42"), so the key layout lives next to the storage. In a Redis version that is also where the shard hash tag goes.
+	It treats the scope name as an opaque label. It doesnt need to know about the org mapping, the cache, Decision, channel, or what "user", "team" and "company" mean.
+	Gets the clock.
+
+MappingCache
+	Handles storage of known user,team,company relationships for a fixed period of freshness. Returns those mappings if the keys are present and fresh, else asks OrgLookup once. Entries expire on a TTL, nobody tells the cache they are stale. An unknown user (None) is not cached, so a new user is found on the next call.
+	Gets the clock for its TTL and an OrgLookup to call.
+	Doesnt need to know about requests, responses, limits or counting.
+
+FailOpen, FailClosed (implementations of FallbackPolicy, see below)
+
+
+INTERFACES (what we depend on, someone else can fill in)
+
+OrgLookup
+	Our side of the org service. lookup(user_id) -> Membership | None.
+	We do not design the real service. In tests a dict plays it.
+
+FallbackPolicy (Strategy)
+	One method: on_store_failure() -> Decision. Two implementations:
+	FailOpen -> Decision(ALLOWED, fallback=True). Used for EMAIL.
+	FailClosed -> Decision(REJECTED, rejection_reason=STORE_UNAVAILABLE, fallback=True). Used for SMS.
+	The policy does not take the channel. RateLimiter receives a dict[Channel, FallbackPolicy] from config, picks by channel and calls it. So a policy is reusable for any channel, and changing a channel's behavior is a config change.
+	Does not know why the store failed, or anything about users, teams or counting.
+
+
+DATACLASSES (frozen, data only, no logic)
+
+Decision
+	composes the final decision information to be passed to the requesting service.
+	Fields: outcome, rejection_reason, retry_after, fallback, error_reason.
+	does not need to be involved in any process, just its member vars.
+
+AdmitResult
+	The store's answer to try_admit. Not the Decision, which is the caller-facing type.
+	Fields: status (AdmitStatus), blocked_scopes (the scope names of the full levels, empty unless REJECTED), retry_after (seconds until the latest of the full levels frees a slot, only meaningful when REJECTED).
+	The store computes retry_after because it holds the timestamps and the clock: the longest wait among the full levels, from each level's oldest entry. The limiter does not turn blocked_scopes into a reason, because the Decision has one RATE_LIMITED for every level. blocked_scopes is for logs and metrics.
+
+ScopeLimit
+	One level to check: scope (opaque name such as "user"), id, limit.
+	The limiter builds one per level from Membership and Limits. The store turns scope and id into a key.
+
+Limits
+	pulled from config, passed to RateLimiter at construction.
+	Fields: user_cap, team_cap, company_cap, window_seconds.
+	Numbers only. Does not know how they are enforced or where the data lives.
+
+Membership
+	(team_id, company_id). Result given by MappingCache.
+
+
+ENUMS (fixed value sets)
+
+AdmitStatus: ACCEPTED, SEEN, REJECTED
+Channel: EMAIL, SMS. Push is out of scope for now.
+Outcome: ALLOWED, REJECTED, ERROR
+RejectionReason: RATE_LIMITED, STORE_UNAVAILABLE
+ErrorReason: UNKNOWN_USER
+
+
+EXCEPTIONS
+
+StoreUnavailable
+	Raised by a LogStore when it cannot answer (timeout, lost connection). A real store catches its client library's errors and re-raises this, so RateLimiter depends on our exception and not on Redis. The in-memory LogStore never raises it.
+
+
+CALLABLES (passed in, not classes)
+
+clock: Callable[[], float]
+	Received by MappingCache and LogStore.

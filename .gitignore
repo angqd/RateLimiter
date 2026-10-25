@@ -1,0 +1,26 @@
+# Local-only reference material
+ReferenceFiles/
+
+# Secrets and local config
+.env
+.env.*
+*.pem
+*.key
+secrets*
+
+# Python and tooling
+__pycache__/
+*.pyc
+.pytest_cache/
+venv/
+.venv/
+
+# Local logs and OS files
+*.log
+.DS_Store
+
+# Local-only design notes
+Spec
+DataModel
+RevisionNotes.md
+LLD_Notes

@@ -1,0 +1,1315 @@
+{
+  "generated_by": "visualize.py",
+  "limits": {
+    "user_cap": 3,
+    "team_cap": 5,
+    "company_cap": 8,
+    "window_seconds": 600.0
+  },
+  "window_seconds": 600.0,
+  "scenarios": [
+    {
+      "id": "user-cap",
+      "title": "User cap",
+      "description": "Alice sends 4 emails, 60 s apart. Her cap is 3, so the 4th send waits until the oldest one leaves the window.",
+      "events": [
+        {
+          "step": 0,
+          "t": 0.0,
+          "user": "alice",
+          "request_id": "a1",
+          "channel": "EMAIL",
+          "outcome": "ALLOWED",
+          "rejection_reason": null,
+          "retry_after": null,
+          "fallback": false,
+          "error_reason": null,
+          "duplicate": false,
+          "keys": {
+            "user": "user:alice",
+            "team": "team:design",
+            "company": "company:acme"
+          },
+          "caps": {
+            "user": 3,
+            "team": 5,
+            "company": 8
+          },
+          "window_seconds": 600.0,
+          "snapshot": {
+            "user:alice": [
+              [
+                0.0,
+                "a1"
+              ]
+            ],
+            "team:design": [
+              [
+                0.0,
+                "a1"
+              ]
+            ],
+            "company:acme": [
+              [
+                0.0,
+                "a1"
+              ]
+            ]
+          },
+          "blocked_lanes": [],
+          "limiting_lane": null,
+          "caption": "alice's 1st send (a1) at t=0 s: every lane has room, so it is allowed (user 1 of 3, team 1 of 5, company 1 of 8)."
+        },
+        {
+          "step": 1,
+          "t": 60.0,
+          "user": "alice",
+          "request_id": "a2",
+          "channel": "EMAIL",
+          "outcome": "ALLOWED",
+          "rejection_reason": null,
+          "retry_after": null,
+          "fallback": false,
+          "error_reason": null,
+          "duplicate": false,
+          "keys": {
+            "user": "user:alice",
+            "team": "team:design",
+            "company": "company:acme"
+          },
+          "caps": {
+            "user": 3,
+            "team": 5,
+            "company": 8
+          },
+          "window_seconds": 600.0,
+          "snapshot": {
+            "user:alice": [
+              [
+                0.0,
+                "a1"
+              ],
+              [
+                60.0,
+                "a2"
+              ]
+            ],
+            "team:design": [
+              [
+                0.0,
+                "a1"
+              ],
+              [
+                60.0,
+                "a2"
+              ]
+            ],
+            "company:acme": [
+              [
+                0.0,
+                "a1"
+              ],
+              [
+                60.0,
+                "a2"
+              ]
+            ]
+          },
+          "blocked_lanes": [],
+          "limiting_lane": null,
+          "caption": "alice's 2nd send (a2) at t=60 s: every lane has room, so it is allowed (user 2 of 3, team 2 of 5, company 2 of 8)."
+        },
+        {
+          "step": 2,
+          "t": 120.0,
+          "user": "alice",
+          "request_id": "a3",
+          "channel": "EMAIL",
+          "outcome": "ALLOWED",
+          "rejection_reason": null,
+          "retry_after": null,
+          "fallback": false,
+          "error_reason": null,
+          "duplicate": false,
+          "keys": {
+            "user": "user:alice",
+            "team": "team:design",
+            "company": "company:acme"
+          },
+          "caps": {
+            "user": 3,
+            "team": 5,
+            "company": 8
+          },
+          "window_seconds": 600.0,
+          "snapshot": {
+            "user:alice": [
+              [
+                0.0,
+                "a1"
+              ],
+              [
+                60.0,
+                "a2"
+              ],
+              [
+                120.0,
+                "a3"
+              ]
+            ],
+            "team:design": [
+              [
+                0.0,
+                "a1"
+              ],
+              [
+                60.0,
+                "a2"
+              ],
+              [
+                120.0,
+                "a3"
+              ]
+            ],
+            "company:acme": [
+              [
+                0.0,
+                "a1"
+              ],
+              [
+                60.0,
+                "a2"
+              ],
+              [
+                120.0,
+                "a3"
+              ]
+            ]
+          },
+          "blocked_lanes": [],
+          "limiting_lane": null,
+          "caption": "alice's 3rd send (a3) at t=120 s: every lane has room, so it is allowed (user 3 of 3, team 3 of 5, company 3 of 8)."
+        },
+        {
+          "step": 3,
+          "t": 180.0,
+          "user": "alice",
+          "request_id": "a4",
+          "channel": "EMAIL",
+          "outcome": "REJECTED",
+          "rejection_reason": "RATE_LIMITED",
+          "retry_after": 420.0,
+          "fallback": false,
+          "error_reason": null,
+          "duplicate": false,
+          "keys": {
+            "user": "user:alice",
+            "team": "team:design",
+            "company": "company:acme"
+          },
+          "caps": {
+            "user": 3,
+            "team": 5,
+            "company": 8
+          },
+          "window_seconds": 600.0,
+          "snapshot": {
+            "user:alice": [
+              [
+                0.0,
+                "a1"
+              ],
+              [
+                60.0,
+                "a2"
+              ],
+              [
+                120.0,
+                "a3"
+              ]
+            ],
+            "team:design": [
+              [
+                0.0,
+                "a1"
+              ],
+              [
+                60.0,
+                "a2"
+              ],
+              [
+                120.0,
+                "a3"
+              ]
+            ],
+            "company:acme": [
+              [
+                0.0,
+                "a1"
+              ],
+              [
+                60.0,
+                "a2"
+              ],
+              [
+                120.0,
+                "a3"
+              ]
+            ]
+          },
+          "blocked_lanes": [
+            "user"
+          ],
+          "limiting_lane": "user",
+          "caption": "alice's 4th send: user lane is full (3 of 3), retry in 420 s."
+        }
+      ]
+    },
+    {
+      "id": "same-request",
+      "title": "Same request_id",
+      "description": "Retrying a send that is already in the log is allowed, but it is not counted a second time.",
+      "events": [
+        {
+          "step": 0,
+          "t": 0.0,
+          "user": "alice",
+          "request_id": "a1",
+          "channel": "EMAIL",
+          "outcome": "ALLOWED",
+          "rejection_reason": null,
+          "retry_after": null,
+          "fallback": false,
+          "error_reason": null,
+          "duplicate": false,
+          "keys": {
+            "user": "user:alice",
+            "team": "team:design",
+            "company": "company:acme"
+          },
+          "caps": {
+            "user": 3,
+            "team": 5,
+            "company": 8
+          },
+          "window_seconds": 600.0,
+          "snapshot": {
+            "user:alice": [
+              [
+                0.0,
+                "a1"
+              ]
+            ],
+            "team:design": [
+              [
+                0.0,
+                "a1"
+              ]
+            ],
+            "company:acme": [
+              [
+                0.0,
+                "a1"
+              ]
+            ]
+          },
+          "blocked_lanes": [],
+          "limiting_lane": null,
+          "caption": "alice's 1st send (a1) at t=0 s: every lane has room, so it is allowed (user 1 of 3, team 1 of 5, company 1 of 8)."
+        },
+        {
+          "step": 1,
+          "t": 30.0,
+          "user": "alice",
+          "request_id": "a2",
+          "channel": "EMAIL",
+          "outcome": "ALLOWED",
+          "rejection_reason": null,
+          "retry_after": null,
+          "fallback": false,
+          "error_reason": null,
+          "duplicate": false,
+          "keys": {
+            "user": "user:alice",
+            "team": "team:design",
+            "company": "company:acme"
+          },
+          "caps": {
+            "user": 3,
+            "team": 5,
+            "company": 8
+          },
+          "window_seconds": 600.0,
+          "snapshot": {
+            "user:alice": [
+              [
+                0.0,
+                "a1"
+              ],
+              [
+                30.0,
+                "a2"
+              ]
+            ],
+            "team:design": [
+              [
+                0.0,
+                "a1"
+              ],
+              [
+                30.0,
+                "a2"
+              ]
+            ],
+            "company:acme": [
+              [
+                0.0,
+                "a1"
+              ],
+              [
+                30.0,
+                "a2"
+              ]
+            ]
+          },
+          "blocked_lanes": [],
+          "limiting_lane": null,
+          "caption": "alice's 2nd send (a2) at t=30 s: every lane has room, so it is allowed (user 2 of 3, team 2 of 5, company 2 of 8)."
+        },
+        {
+          "step": 2,
+          "t": 45.0,
+          "user": "alice",
+          "request_id": "a1",
+          "channel": "EMAIL",
+          "outcome": "ALLOWED",
+          "rejection_reason": null,
+          "retry_after": null,
+          "fallback": false,
+          "error_reason": null,
+          "duplicate": true,
+          "keys": {
+            "user": "user:alice",
+            "team": "team:design",
+            "company": "company:acme"
+          },
+          "caps": {
+            "user": 3,
+            "team": 5,
+            "company": 8
+          },
+          "window_seconds": 600.0,
+          "snapshot": {
+            "user:alice": [
+              [
+                0.0,
+                "a1"
+              ],
+              [
+                30.0,
+                "a2"
+              ]
+            ],
+            "team:design": [
+              [
+                0.0,
+                "a1"
+              ],
+              [
+                30.0,
+                "a2"
+              ]
+            ],
+            "company:acme": [
+              [
+                0.0,
+                "a1"
+              ],
+              [
+                30.0,
+                "a2"
+              ]
+            ]
+          },
+          "blocked_lanes": [],
+          "limiting_lane": null,
+          "caption": "alice retries a1: it is already in the log, so it is allowed without being counted again (user lane 2 of 3)."
+        }
+      ]
+    },
+    {
+      "id": "team-cap",
+      "title": "Team cap",
+      "description": "Alice and Bob fill the design team's 5 slots. Carol has sent nothing, but the team lane is full, so she is blocked.",
+      "events": [
+        {
+          "step": 0,
+          "t": 0.0,
+          "user": "alice",
+          "request_id": "a1",
+          "channel": "EMAIL",
+          "outcome": "ALLOWED",
+          "rejection_reason": null,
+          "retry_after": null,
+          "fallback": false,
+          "error_reason": null,
+          "duplicate": false,
+          "keys": {
+            "user": "user:alice",
+            "team": "team:design",
+            "company": "company:acme"
+          },
+          "caps": {
+            "user": 3,
+            "team": 5,
+            "company": 8
+          },
+          "window_seconds": 600.0,
+          "snapshot": {
+            "user:alice": [
+              [
+                0.0,
+                "a1"
+              ]
+            ],
+            "team:design": [
+              [
+                0.0,
+                "a1"
+              ]
+            ],
+            "company:acme": [
+              [
+                0.0,
+                "a1"
+              ]
+            ]
+          },
+          "blocked_lanes": [],
+          "limiting_lane": null,
+          "caption": "alice's 1st send (a1) at t=0 s: every lane has room, so it is allowed (user 1 of 3, team 1 of 5, company 1 of 8)."
+        },
+        {
+          "step": 1,
+          "t": 60.0,
+          "user": "alice",
+          "request_id": "a2",
+          "channel": "EMAIL",
+          "outcome": "ALLOWED",
+          "rejection_reason": null,
+          "retry_after": null,
+          "fallback": false,
+          "error_reason": null,
+          "duplicate": false,
+          "keys": {
+            "user": "user:alice",
+            "team": "team:design",
+            "company": "company:acme"
+          },
+          "caps": {
+            "user": 3,
+            "team": 5,
+            "company": 8
+          },
+          "window_seconds": 600.0,
+          "snapshot": {
+            "user:alice": [
+              [
+                0.0,
+                "a1"
+              ],
+              [
+                60.0,
+                "a2"
+              ]
+            ],
+            "team:design": [
+              [
+                0.0,
+                "a1"
+              ],
+              [
+                60.0,
+                "a2"
+              ]
+            ],
+            "company:acme": [
+              [
+                0.0,
+                "a1"
+              ],
+              [
+                60.0,
+                "a2"
+              ]
+            ]
+          },
+          "blocked_lanes": [],
+          "limiting_lane": null,
+          "caption": "alice's 2nd send (a2) at t=60 s: every lane has room, so it is allowed (user 2 of 3, team 2 of 5, company 2 of 8)."
+        },
+        {
+          "step": 2,
+          "t": 120.0,
+          "user": "alice",
+          "request_id": "a3",
+          "channel": "EMAIL",
+          "outcome": "ALLOWED",
+          "rejection_reason": null,
+          "retry_after": null,
+          "fallback": false,
+          "error_reason": null,
+          "duplicate": false,
+          "keys": {
+            "user": "user:alice",
+            "team": "team:design",
+            "company": "company:acme"
+          },
+          "caps": {
+            "user": 3,
+            "team": 5,
+            "company": 8
+          },
+          "window_seconds": 600.0,
+          "snapshot": {
+            "user:alice": [
+              [
+                0.0,
+                "a1"
+              ],
+              [
+                60.0,
+                "a2"
+              ],
+              [
+                120.0,
+                "a3"
+              ]
+            ],
+            "team:design": [
+              [
+                0.0,
+                "a1"
+              ],
+              [
+                60.0,
+                "a2"
+              ],
+              [
+                120.0,
+                "a3"
+              ]
+            ],
+            "company:acme": [
+              [
+                0.0,
+                "a1"
+              ],
+              [
+                60.0,
+                "a2"
+              ],
+              [
+                120.0,
+                "a3"
+              ]
+            ]
+          },
+          "blocked_lanes": [],
+          "limiting_lane": null,
+          "caption": "alice's 3rd send (a3) at t=120 s: every lane has room, so it is allowed (user 3 of 3, team 3 of 5, company 3 of 8)."
+        },
+        {
+          "step": 3,
+          "t": 180.0,
+          "user": "bob",
+          "request_id": "b1",
+          "channel": "EMAIL",
+          "outcome": "ALLOWED",
+          "rejection_reason": null,
+          "retry_after": null,
+          "fallback": false,
+          "error_reason": null,
+          "duplicate": false,
+          "keys": {
+            "user": "user:bob",
+            "team": "team:design",
+            "company": "company:acme"
+          },
+          "caps": {
+            "user": 3,
+            "team": 5,
+            "company": 8
+          },
+          "window_seconds": 600.0,
+          "snapshot": {
+            "user:bob": [
+              [
+                180.0,
+                "b1"
+              ]
+            ],
+            "team:design": [
+              [
+                0.0,
+                "a1"
+              ],
+              [
+                60.0,
+                "a2"
+              ],
+              [
+                120.0,
+                "a3"
+              ],
+              [
+                180.0,
+                "b1"
+              ]
+            ],
+            "company:acme": [
+              [
+                0.0,
+                "a1"
+              ],
+              [
+                60.0,
+                "a2"
+              ],
+              [
+                120.0,
+                "a3"
+              ],
+              [
+                180.0,
+                "b1"
+              ]
+            ]
+          },
+          "blocked_lanes": [],
+          "limiting_lane": null,
+          "caption": "bob's 1st send (b1) at t=180 s: every lane has room, so it is allowed (user 1 of 3, team 4 of 5, company 4 of 8)."
+        },
+        {
+          "step": 4,
+          "t": 240.0,
+          "user": "bob",
+          "request_id": "b2",
+          "channel": "EMAIL",
+          "outcome": "ALLOWED",
+          "rejection_reason": null,
+          "retry_after": null,
+          "fallback": false,
+          "error_reason": null,
+          "duplicate": false,
+          "keys": {
+            "user": "user:bob",
+            "team": "team:design",
+            "company": "company:acme"
+          },
+          "caps": {
+            "user": 3,
+            "team": 5,
+            "company": 8
+          },
+          "window_seconds": 600.0,
+          "snapshot": {
+            "user:bob": [
+              [
+                180.0,
+                "b1"
+              ],
+              [
+                240.0,
+                "b2"
+              ]
+            ],
+            "team:design": [
+              [
+                0.0,
+                "a1"
+              ],
+              [
+                60.0,
+                "a2"
+              ],
+              [
+                120.0,
+                "a3"
+              ],
+              [
+                180.0,
+                "b1"
+              ],
+              [
+                240.0,
+                "b2"
+              ]
+            ],
+            "company:acme": [
+              [
+                0.0,
+                "a1"
+              ],
+              [
+                60.0,
+                "a2"
+              ],
+              [
+                120.0,
+                "a3"
+              ],
+              [
+                180.0,
+                "b1"
+              ],
+              [
+                240.0,
+                "b2"
+              ]
+            ]
+          },
+          "blocked_lanes": [],
+          "limiting_lane": null,
+          "caption": "bob's 2nd send (b2) at t=240 s: every lane has room, so it is allowed (user 2 of 3, team 5 of 5, company 5 of 8)."
+        },
+        {
+          "step": 5,
+          "t": 300.0,
+          "user": "carol",
+          "request_id": "c1",
+          "channel": "EMAIL",
+          "outcome": "REJECTED",
+          "rejection_reason": "RATE_LIMITED",
+          "retry_after": 300.0,
+          "fallback": false,
+          "error_reason": null,
+          "duplicate": false,
+          "keys": {
+            "user": "user:carol",
+            "team": "team:design",
+            "company": "company:acme"
+          },
+          "caps": {
+            "user": 3,
+            "team": 5,
+            "company": 8
+          },
+          "window_seconds": 600.0,
+          "snapshot": {
+            "user:carol": [],
+            "team:design": [
+              [
+                0.0,
+                "a1"
+              ],
+              [
+                60.0,
+                "a2"
+              ],
+              [
+                120.0,
+                "a3"
+              ],
+              [
+                180.0,
+                "b1"
+              ],
+              [
+                240.0,
+                "b2"
+              ]
+            ],
+            "company:acme": [
+              [
+                0.0,
+                "a1"
+              ],
+              [
+                60.0,
+                "a2"
+              ],
+              [
+                120.0,
+                "a3"
+              ],
+              [
+                180.0,
+                "b1"
+              ],
+              [
+                240.0,
+                "b2"
+              ]
+            ]
+          },
+          "blocked_lanes": [
+            "team"
+          ],
+          "limiting_lane": "team",
+          "caption": "carol's 1st send: team lane is full (5 of 5), retry in 300 s."
+        }
+      ]
+    },
+    {
+      "id": "window-slide",
+      "title": "Window slides",
+      "description": "A send stops counting exactly 600 s after it was made. At t=600 the send from t=0 expires and alice is allowed again.",
+      "events": [
+        {
+          "step": 0,
+          "t": 0.0,
+          "user": "alice",
+          "request_id": "a1",
+          "channel": "EMAIL",
+          "outcome": "ALLOWED",
+          "rejection_reason": null,
+          "retry_after": null,
+          "fallback": false,
+          "error_reason": null,
+          "duplicate": false,
+          "keys": {
+            "user": "user:alice",
+            "team": "team:design",
+            "company": "company:acme"
+          },
+          "caps": {
+            "user": 3,
+            "team": 5,
+            "company": 8
+          },
+          "window_seconds": 600.0,
+          "snapshot": {
+            "user:alice": [
+              [
+                0.0,
+                "a1"
+              ]
+            ],
+            "team:design": [
+              [
+                0.0,
+                "a1"
+              ]
+            ],
+            "company:acme": [
+              [
+                0.0,
+                "a1"
+              ]
+            ]
+          },
+          "blocked_lanes": [],
+          "limiting_lane": null,
+          "caption": "alice's 1st send (a1) at t=0 s: every lane has room, so it is allowed (user 1 of 3, team 1 of 5, company 1 of 8)."
+        },
+        {
+          "step": 1,
+          "t": 60.0,
+          "user": "alice",
+          "request_id": "a2",
+          "channel": "EMAIL",
+          "outcome": "ALLOWED",
+          "rejection_reason": null,
+          "retry_after": null,
+          "fallback": false,
+          "error_reason": null,
+          "duplicate": false,
+          "keys": {
+            "user": "user:alice",
+            "team": "team:design",
+            "company": "company:acme"
+          },
+          "caps": {
+            "user": 3,
+            "team": 5,
+            "company": 8
+          },
+          "window_seconds": 600.0,
+          "snapshot": {
+            "user:alice": [
+              [
+                0.0,
+                "a1"
+              ],
+              [
+                60.0,
+                "a2"
+              ]
+            ],
+            "team:design": [
+              [
+                0.0,
+                "a1"
+              ],
+              [
+                60.0,
+                "a2"
+              ]
+            ],
+            "company:acme": [
+              [
+                0.0,
+                "a1"
+              ],
+              [
+                60.0,
+                "a2"
+              ]
+            ]
+          },
+          "blocked_lanes": [],
+          "limiting_lane": null,
+          "caption": "alice's 2nd send (a2) at t=60 s: every lane has room, so it is allowed (user 2 of 3, team 2 of 5, company 2 of 8)."
+        },
+        {
+          "step": 2,
+          "t": 120.0,
+          "user": "alice",
+          "request_id": "a3",
+          "channel": "EMAIL",
+          "outcome": "ALLOWED",
+          "rejection_reason": null,
+          "retry_after": null,
+          "fallback": false,
+          "error_reason": null,
+          "duplicate": false,
+          "keys": {
+            "user": "user:alice",
+            "team": "team:design",
+            "company": "company:acme"
+          },
+          "caps": {
+            "user": 3,
+            "team": 5,
+            "company": 8
+          },
+          "window_seconds": 600.0,
+          "snapshot": {
+            "user:alice": [
+              [
+                0.0,
+                "a1"
+              ],
+              [
+                60.0,
+                "a2"
+              ],
+              [
+                120.0,
+                "a3"
+              ]
+            ],
+            "team:design": [
+              [
+                0.0,
+                "a1"
+              ],
+              [
+                60.0,
+                "a2"
+              ],
+              [
+                120.0,
+                "a3"
+              ]
+            ],
+            "company:acme": [
+              [
+                0.0,
+                "a1"
+              ],
+              [
+                60.0,
+                "a2"
+              ],
+              [
+                120.0,
+                "a3"
+              ]
+            ]
+          },
+          "blocked_lanes": [],
+          "limiting_lane": null,
+          "caption": "alice's 3rd send (a3) at t=120 s: every lane has room, so it is allowed (user 3 of 3, team 3 of 5, company 3 of 8)."
+        },
+        {
+          "step": 3,
+          "t": 300.0,
+          "user": "alice",
+          "request_id": "a4",
+          "channel": "EMAIL",
+          "outcome": "REJECTED",
+          "rejection_reason": "RATE_LIMITED",
+          "retry_after": 300.0,
+          "fallback": false,
+          "error_reason": null,
+          "duplicate": false,
+          "keys": {
+            "user": "user:alice",
+            "team": "team:design",
+            "company": "company:acme"
+          },
+          "caps": {
+            "user": 3,
+            "team": 5,
+            "company": 8
+          },
+          "window_seconds": 600.0,
+          "snapshot": {
+            "user:alice": [
+              [
+                0.0,
+                "a1"
+              ],
+              [
+                60.0,
+                "a2"
+              ],
+              [
+                120.0,
+                "a3"
+              ]
+            ],
+            "team:design": [
+              [
+                0.0,
+                "a1"
+              ],
+              [
+                60.0,
+                "a2"
+              ],
+              [
+                120.0,
+                "a3"
+              ]
+            ],
+            "company:acme": [
+              [
+                0.0,
+                "a1"
+              ],
+              [
+                60.0,
+                "a2"
+              ],
+              [
+                120.0,
+                "a3"
+              ]
+            ]
+          },
+          "blocked_lanes": [
+            "user"
+          ],
+          "limiting_lane": "user",
+          "caption": "alice's 4th send: user lane is full (3 of 3), retry in 300 s."
+        },
+        {
+          "step": 4,
+          "t": 599.0,
+          "user": "alice",
+          "request_id": "a5",
+          "channel": "EMAIL",
+          "outcome": "REJECTED",
+          "rejection_reason": "RATE_LIMITED",
+          "retry_after": 1.0,
+          "fallback": false,
+          "error_reason": null,
+          "duplicate": false,
+          "keys": {
+            "user": "user:alice",
+            "team": "team:design",
+            "company": "company:acme"
+          },
+          "caps": {
+            "user": 3,
+            "team": 5,
+            "company": 8
+          },
+          "window_seconds": 600.0,
+          "snapshot": {
+            "user:alice": [
+              [
+                0.0,
+                "a1"
+              ],
+              [
+                60.0,
+                "a2"
+              ],
+              [
+                120.0,
+                "a3"
+              ]
+            ],
+            "team:design": [
+              [
+                0.0,
+                "a1"
+              ],
+              [
+                60.0,
+                "a2"
+              ],
+              [
+                120.0,
+                "a3"
+              ]
+            ],
+            "company:acme": [
+              [
+                0.0,
+                "a1"
+              ],
+              [
+                60.0,
+                "a2"
+              ],
+              [
+                120.0,
+                "a3"
+              ]
+            ]
+          },
+          "blocked_lanes": [
+            "user"
+          ],
+          "limiting_lane": "user",
+          "caption": "alice's 5th send: user lane is full (3 of 3), retry in 1 s."
+        },
+        {
+          "step": 5,
+          "t": 600.0,
+          "user": "alice",
+          "request_id": "a6",
+          "channel": "EMAIL",
+          "outcome": "ALLOWED",
+          "rejection_reason": null,
+          "retry_after": null,
+          "fallback": false,
+          "error_reason": null,
+          "duplicate": false,
+          "keys": {
+            "user": "user:alice",
+            "team": "team:design",
+            "company": "company:acme"
+          },
+          "caps": {
+            "user": 3,
+            "team": 5,
+            "company": 8
+          },
+          "window_seconds": 600.0,
+          "snapshot": {
+            "user:alice": [
+              [
+                60.0,
+                "a2"
+              ],
+              [
+                120.0,
+                "a3"
+              ],
+              [
+                600.0,
+                "a6"
+              ]
+            ],
+            "team:design": [
+              [
+                60.0,
+                "a2"
+              ],
+              [
+                120.0,
+                "a3"
+              ],
+              [
+                600.0,
+                "a6"
+              ]
+            ],
+            "company:acme": [
+              [
+                60.0,
+                "a2"
+              ],
+              [
+                120.0,
+                "a3"
+              ],
+              [
+                600.0,
+                "a6"
+              ]
+            ]
+          },
+          "blocked_lanes": [],
+          "limiting_lane": null,
+          "caption": "alice's 6th send (a6) at t=600 s: every lane has room, so it is allowed (user 3 of 3, team 3 of 5, company 3 of 8). The send at t=0 s reached 0 + 600 and stopped counting."
+        },
+        {
+          "step": 6,
+          "t": 1000.0,
+          "user": "alice",
+          "request_id": "a7",
+          "channel": "EMAIL",
+          "outcome": "ALLOWED",
+          "rejection_reason": null,
+          "retry_after": null,
+          "fallback": false,
+          "error_reason": null,
+          "duplicate": false,
+          "keys": {
+            "user": "user:alice",
+            "team": "team:design",
+            "company": "company:acme"
+          },
+          "caps": {
+            "user": 3,
+            "team": 5,
+            "company": 8
+          },
+          "window_seconds": 600.0,
+          "snapshot": {
+            "user:alice": [
+              [
+                600.0,
+                "a6"
+              ],
+              [
+                1000.0,
+                "a7"
+              ]
+            ],
+            "team:design": [
+              [
+                600.0,
+                "a6"
+              ],
+              [
+                1000.0,
+                "a7"
+              ]
+            ],
+            "company:acme": [
+              [
+                600.0,
+                "a6"
+              ],
+              [
+                1000.0,
+                "a7"
+              ]
+            ]
+          },
+          "blocked_lanes": [],
+          "limiting_lane": null,
+          "caption": "alice's 7th send (a7) at t=1000 s: every lane has room, so it is allowed (user 2 of 3, team 2 of 5, company 2 of 8)."
+        }
+      ]
+    }
+  ]
+}
